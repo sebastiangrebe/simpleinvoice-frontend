@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.maturestack.com
+
+# Sitemaps
+Sitemap: https://www.maturestack.com/sitemap.xml
