@@ -3,12 +3,11 @@ import { CheckCircle } from "lucide-react";
 import Image from "next/image";
 
 const services = [
-  "24/7 Customer Support",
-  "Custom Integration Services",
-  "Dedicated Account Manager",
-  "Training & Onboarding",
-  "Performance Optimization",
-  "Security Audits",
+  "Invoicing That Fuels Success",
+  "Custom Invoice Templates",
+  "Quick Setup & Onboarding",
+  "Optimized Performance",
+  "Secure & Reliable",
 ];
 
 export function ServicesSection() {
@@ -26,7 +25,7 @@ export function ServicesSection() {
           <ul className="mt-8 grid gap-4">
             {services.map((service) => (
               <li key={service} className="flex items-center gap-4">
-                <CheckCircle className="h-6 w-6 text-primary" />
+                <CheckCircle className="h-6 w-6 text-[#0191ea]" />
                 <span>{service}</span>
               </li>
             ))}

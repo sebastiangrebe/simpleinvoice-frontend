@@ -13,9 +13,9 @@ export function HeroSection() {
           Introducing Clear : Invoice 1.0.0
         </span>
         <h1 className="mt-8 text-2xl text-primary/95 sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tighter">
-          Invoicing made{" "}
+        Create, Send, {" "}
           <span className="block -mt-2 bg-gradient-to-l from-blue-500 via-teal-500 to-green-500 text-transparent bg-clip-text">
-            super easy!
+          Get Paid – Simple!
           </span>
         </h1>
 

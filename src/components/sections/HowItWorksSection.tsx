@@ -1,65 +1,91 @@
-import { Card, CardContent } from "@/components/ui/Card";
-import { ClipboardCheck, Settings, UserPlus } from "lucide-react";
-import BiggerCard from "../ui/BiggerCard";
+"use client"
+import Image from 'next/image';
+import { useState } from 'react';
+import { Button } from '../ui/Button';
+import invoice from '../../../public/invoice.webp'
+import paid from '../../../public/paid.png'
+import signup from '../../../public/signup.png'
 
-const steps = [
-  {
-    icon: <UserPlus className="h-12 w-12" />,
-    title: "Create Account",
-    description: "Sign up in minutes with our simple onboarding process.",
-  },
-  {
-    icon: <Settings className="h-12 w-12" />,
-    title: "Configure Settings",
-    description: "Customize the platform to match your specific needs.",
-  },
-  {
-    icon: <ClipboardCheck className="h-12 w-12" />,
-    title: "Start Working",
-    description: "Begin using the platform and see immediate results.",
-  },
-  {
-    icon: <ClipboardCheck className="h-12 w-12" />,
-    title: "Start Working",
-    description: "Begin using the platform and see immediate results.",
-  },
-];
 
-export function HowItWorksSection() {
-  return (
-    <section className="container py-24 sm:py-32">
-      <div className="text-center">
-        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-          Generate. Deliver. Receive Payment
-        </h2>
-        <p className="mt-4 text-lg text-muted-foreground">
-          Begin your journey with our platform in just few easy steps.
-        </p>
+export const HowItWorksSection = () => {
+  const [activeTab, setActiveTab] = useState(0);
+
+  const tabs = ['Step 1: Sign Up', 'Step 2: Create Invoice', 'Step 3: Send & Get Paid'];
+
+  const content = [
+    <div key="tab1" className="flex items-center p-4">
+      <div className='w-1/2 p-8'>
+      <h2 className="text-2xl font-bold mb-2">Kickstart Your Billing Journey</h2>
+      <p className="text-gray-600 mb-4">
+      Join in seconds and set the stage for seamless invoicing. Quick, easy, and hassle-free!
+      </p>
       </div>
-      <div className="mx-[8%] mt-16 grid gap-8 sm:grid-cols-2">
-        {steps.map((step) => (
-          <Card key={step.title} className="w-full mt-10 relative">
-            <CardContent className="pt-16">
-              <div className="absolute -top-10 left-1/2 -translate-x-1/2 rounded-full border-4 border-background bg-primary p-6 text-primary-foreground">
-                {step.icon}
-              </div>
-              <div className="mt-6 text-center">
-                <h3 className="text-2xl font-semibold">{step.title}</h3>
-                <p className="mt-4 text-lg text-muted-foreground">{step.description}</p>
-              </div>
+      <div className='w-1/2 p-8'>
+      <Image
+        src={signup}
+        alt="Sample 1"
+        className="w-96 h-96 object-cover rounded-lg"
+      />
+      </div>
+    </div>,
+    <div key="tab2" className="flex items-center p-4">
+      <div className='w-1/2 p-4'>
+      <h2 className="text-2xl font-bold mb-2">Craft Your Invoice, Your Way</h2>
+      <p className="text-gray-600 mb-4">
+      Design professional invoices with ease. Tailor every detail to suit your business needs in just a few clicks.
+      </p>
+      </div>
+      <div className='w-1/2 p-4'>
+      <Image
+        src={invoice}
+        alt="Sample 2"
+        className="w-96 h-96 object-cover rounded-lg"
+      />
+      </div>
+    </div>,
+    <div key="tab3" className="flex  items-center p-4">
+      <div className='w-1/2 p-4'>
+      <h2 className="text-2xl font-bold mb-2">Send. Sit Back. Get Paid.</h2>
+      <p className="text-gray-600 mb-4">
+      Share your invoices instantly and watch the payments roll in. Efficient, secure, and stress-free!
+      </p>
+      </div>
+      <div className='w-1/2 p-4'>
+      <Image
+        src={paid}
+        alt="Sample 3"
+        className="w-96 h-96 object-cover rounded-lg"
+      />
+      </div>
+    </div>,
+  ];
 
-              <div className="text-center">
-                <a href="#" className="text-[#0091ea] ml-[40%] mt-10 font-semibold text-sm hover:underline flex items-center">
-                  Learn More
-                  <svg xmlns="http://www.w3.org/2000/svg" className="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </a>
-              </div>
-            </CardContent>
-          </Card>
+  return (
+    <div className="max-w-6xl mx-auto p-4">
+            <div className="text-center">
+        <h2 className="text-3xl my-6 mb-12 font-bold tracking-tight sm:text-4xl">
+          SignUp. Create Invoice. Get Paid
+        </h2>
+      </div>
+      <div className="flex justify-center space-x-4 mb-4">
+        {tabs.map((tab, index) => (
+          <Button
+            key={index}
+            onClick={() => setActiveTab(index)}
+            className={`px-4 py-2 mb-8 text-sm font-medium rounded ${
+              activeTab === index
+                ? 'bg-[#0191ea] text-white'
+                : 'bg-gray-200 hover:bg-[#0191ea] text-gray-700'
+            }`}
+          >
+            {tab}
+          </Button>
         ))}
       </div>
-    </section>
+      <div className="p-4 bg-[#d6ebf3]   rounded-xl">
+        {content[activeTab]}
+      </div>
+    </div>
   );
-}
+};
+

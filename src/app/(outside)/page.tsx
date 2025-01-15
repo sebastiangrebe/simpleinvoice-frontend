@@ -16,12 +16,12 @@ function Home() {
         <HeroSection />
         {/* <ClientsSection /> */}
         {/* <AboutSection /> */}
+        <FeaturesSection />
         <HowItWorksSection />
-        {/* <FeaturesSection /> */}
-        <ServicesSection />
         <NewsletterSection />
+        <ServicesSection />
         <TestimonialsSection />
-        <TeamSection />
+        {/* <TeamSection /> */}
         <PricingSection />
         <FAQSection />
       </main>

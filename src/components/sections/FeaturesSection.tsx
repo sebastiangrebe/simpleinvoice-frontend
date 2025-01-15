@@ -1,66 +1,68 @@
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/Card";
-import { BarChart, Cloud, Code, Database, Lock, Zap } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/Card";
+import { ClipboardCheck, Settings, UserPlus } from "lucide-react";
+import BiggerCard from "../ui/BiggerCard";
 
-const features = [
+const steps = [
   {
-    icon: <Cloud className="h-6 w-6" />,
-    title: "Cloud-Based",
-    description: "Access your work from anywhere, anytime with our secure cloud infrastructure.",
+    icon: <UserPlus className="h-12 w-12" />,
+    title: "Easy Invoice Creation",
+    description: "Generate professional invoices in just a few clicks – no hassle, no stress.",
   },
   {
-    icon: <Lock className="h-6 w-6" />,
-    title: "Enterprise Security",
-    description: "Bank-grade security to protect your sensitive data.",
+    icon: <Settings className="h-12 w-12" />,
+    title: "Customizable Templates",
+    description: "Personalize your invoices to reflect your brand's identity.",
   },
   {
-    icon: <Zap className="h-6 w-6" />,
-    title: "Real-Time Updates",
-    description: "Stay synchronized with instant updates across all devices.",
+    icon: <ClipboardCheck className="h-12 w-12" />,
+    title: "Real-Time Tracking",
+    description: "Track payments and send reminders with ease.",
   },
   {
-    icon: <Code className="h-6 w-6" />,
-    title: "API Access",
-    description: "Integrate with your existing tools using our robust API.",
-  },
-  {
-    icon: <Database className="h-6 w-6" />,
-    title: "Data Analytics",
-    description: "Gain insights with powerful analytics and reporting tools.",
-  },
-  {
-    icon: <BarChart className="h-6 w-6" />,
-    title: "Performance Metrics",
-    description: "Track and optimize your business performance in real-time.",
+    icon: <ClipboardCheck className="h-12 w-12" />,
+    title: "Multi-Currency Support",
+    description: "Handle clients globally with our multi-currency features.",
   },
 ];
 
 export function FeaturesSection() {
   return (
-    <section className="container py-24 sm:py-32" id="features">
+    <section className="container py-24 sm:py-32">
       <div className="text-center">
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-          Powerful Features
+          Generate. Deliver. Receive Payment
         </h2>
         <p className="mt-4 text-lg text-muted-foreground">
-          Everything you need to manage and grow your business
+          Begin your journey with our platform in just few easy steps.
         </p>
       </div>
-      <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        {features.map((feature) => (
-          <Card key={feature.title}>
-            <CardHeader>
-              
-              <CardTitle className="flex flex-row items-center">
-                <div className="mr-2 p-2 w-fit rounded-lg bg-primary text-primary-foreground">
-                  {feature.icon}
-                </div>
-                {feature.title}
-              </CardTitle>
-              <CardDescription>{feature.description}</CardDescription>
-            </CardHeader>
+      <div className="mx-[8%] mt-16 grid gap-8 sm:grid-cols-2">
+        {steps.map((step) => (
+          <Card key={step.title} className="w-full mt-10 relative">
+            <CardContent className="pt-16">
+              <div className="absolute -top-10 left-1/2 -translate-x-1/2 rounded-full border-4 border-background bg-primary p-6 text-primary-foreground">
+                {step.icon}
+              </div>
+              <div className="mt-12 text-center">
+                <h3 className="text-2xl font-semibold">{step.title}</h3>
+                <p className="mt-2 text-lg text-muted-foreground">{step.description}</p>
+              </div>
+
+              <div className="text-center">
+                <a href="#" className="text-[#0091ea] ml-[40%] mt-4 font-semibold text-sm hover:underline flex items-center">
+                  Learn More
+                  <svg xmlns="http://www.w3.org/2000/svg" className="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </a>
+              </div>
+            </CardContent>
           </Card>
         ))}
       </div>
+
     </section>
   );
 }
+
+

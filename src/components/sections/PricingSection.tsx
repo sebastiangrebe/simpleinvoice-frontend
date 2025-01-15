@@ -62,7 +62,7 @@ export function PricingSection() {
         {tiers.map((tier) => (
           <Card
             key={tier.name}
-            className={tier.featured ? "border-primary shadow-lg" : ""}
+            className={tier.featured ? "border-[2px] border-[#0091ea]  shadow-lg" : ""}
           >
             <CardHeader>
               <CardTitle>{tier.name}</CardTitle>

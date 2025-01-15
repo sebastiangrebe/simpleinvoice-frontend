@@ -21,7 +21,7 @@ export function Footer() {
           <div className="lg:w-1/3">
             <div className="flex items-center gap-2">
               <img src="/icon.png" alt="MatureStack" className="h-10 w-10" />
-              <span className="text-xl text-white font-bold">MatureStack</span>
+              <span className="text-xl text-white font-bold">Powered by MatureStack</span>
             </div>
             <p className="mt-4 text-slate-300">
               Empowering businesses with innovative solutions for growth and success.

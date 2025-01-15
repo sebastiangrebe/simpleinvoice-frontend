@@ -39,7 +39,7 @@ export function TestimonialsSection() {
       </div>
       <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {testimonials.map((testimonial) => (
-          <Card key={testimonial.name} className="bg-muted/50">
+          <Card key={testimonial.name} className="bg-muted/50 border-[2px]  border-[#0091ea] ">
             <CardContent className="p-6">
               <div className="flex gap-1">
                 {[...Array(5)].map((_, i) => (
