@@ -4,15 +4,15 @@ import Image from "next/image";
 
 const services = [
   "Invoicing That Fuels Success",
-  "Custom Invoice Templates",
+  "Modern Invoice Templates",
   "Quick Setup & Onboarding",
-  "Optimized Performance",
+  "Download in PDF format",
   "Secure & Reliable",
 ];
 
 export function ServicesSection() {
   return (
-    <section className="container py-24 sm:py-32" id="services">
+    <section className="px-[9%] container py-24 sm:py-32" id="services">
       <div className="grid gap-8 lg:grid-cols-[1fr,1fr] lg:gap-16 items-center">
         <div>
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
@@ -36,11 +36,11 @@ export function ServicesSection() {
         </div>
         <div className="relative">
           <Image
-            src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=800"
+            src="/services.jpeg"
             alt="Service illustration"
             className="rounded-lg shadow-xl"
-            width={800}
-            height={800}
+            width={500}
+            height={600}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-background/0 rounded-lg" />
         </div>

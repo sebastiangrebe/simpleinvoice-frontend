@@ -1,29 +1,40 @@
 import { Card, CardContent } from "@/components/ui/Card";
-import { ClipboardCheck, Settings, UserPlus } from "lucide-react";
-import BiggerCard from "../ui/BiggerCard";
+import { BadgeDollarSign, ChartBar, ClipboardCheck, CurrencyIcon, FileCheck, HandCoins, Logs, Settings, UserPlus, WalletCards ,} from "lucide-react";
+import FeatureCard from "../ui/FeatureCard";
 
 const steps = [
   {
-    icon: <UserPlus className="h-12 w-12" />,
-    title: "Easy Invoice Creation",
-    description: "Generate professional invoices in just a few clicks – no hassle, no stress.",
+    icon: <WalletCards className="h-12 w-12 text-[#0091ea]" />,
+    title: "Effortless Invoice Creation",
+    description: "Create professional invoices with just a few clicks. Quick, simple, and error-free invoicing for freelancers."
   },
   {
-    icon: <Settings className="h-12 w-12" />,
-    title: "Customizable Templates",
-    description: "Personalize your invoices to reflect your brand's identity.",
+    icon: <BadgeDollarSign className="h-12 w-12 text-[#0091ea]" />,
+    title: "Comprehensive Tax Reports",
+    description: "Generate detailed tax reports based on your earnings and expenses, making tax season a breeze."
   },
   {
-    icon: <ClipboardCheck className="h-12 w-12" />,
-    title: "Real-Time Tracking",
-    description: "Track payments and send reminders with ease.",
+    icon: <ClipboardCheck className="h-12 w-12 text-[#0091ea]" />,
+    title: "Real-Time Payment Tracking",
+    description: "Track the status of your invoices, receive notifications when paid, and send automated payment reminders."
   },
   {
-    icon: <ClipboardCheck className="h-12 w-12" />,
-    title: "Multi-Currency Support",
-    description: "Handle clients globally with our multi-currency features.",
+    icon: <HandCoins className="h-12 w-12 text-[#0091ea]" />,
+    title: "Flexible Payment Options",
+    description: "Offer clients multiple payment options like credit cards, PayPal, and bank transfers for convenience."
   },
+  {
+    icon: <Logs className="h-12 w-12 text-[#0091ea]" />,
+    title: "Add Business Logo",
+    description: "Personalize & Enhance your invoices by adding your business logo with our online invoice generator. "
+  },
+  {
+    icon: <ChartBar className="h-12 w-12 text-[#0091ea]" />,
+    title: "Financial Insights & Analytics",
+    description: "Get a detailed overview of your income, expenses, and tax liabilities to better manage your finances."
+  }
 ];
+
 
 export function FeaturesSection() {
   return (
@@ -32,36 +43,27 @@ export function FeaturesSection() {
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
           Generate. Deliver. Receive Payment
         </h2>
-        <p className="mt-4 text-lg text-muted-foreground">
-          Begin your journey with our platform in just few easy steps.
-        </p>
       </div>
-      <div className="mx-[8%] mt-16 grid gap-8 sm:grid-cols-2">
-        {steps.map((step) => (
-          <Card key={step.title} className="w-full mt-10 relative">
-            <CardContent className="pt-16">
-              <div className="absolute -top-10 left-1/2 -translate-x-1/2 rounded-full border-4 border-background bg-primary p-6 text-primary-foreground">
-                {step.icon}
-              </div>
-              <div className="mt-12 text-center">
-                <h3 className="text-2xl font-semibold">{step.title}</h3>
-                <p className="mt-2 text-lg text-muted-foreground">{step.description}</p>
-              </div>
-
-              <div className="text-center">
-                <a href="#" className="text-[#0091ea] ml-[40%] mt-4 font-semibold text-sm hover:underline flex items-center">
-                  Learn More
-                  <svg xmlns="http://www.w3.org/2000/svg" className="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </a>
-              </div>
-            </CardContent>
-          </Card>
+      <div className="mx-[9%] mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        {steps.map(( step) => (
+            <FeatureCard
+            className="pt-16"
+            icon={step.icon}
+            title={step.title}
+            description={step.description}
+          >
+            <div className="text-center">
+              <a href="#" className="text-[#0091ea] ml-[30%] font-semibold text-sm hover:underline flex items-center">
+                Learn More
+                <svg xmlns="http://www.w3.org/2000/svg" className="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
+            </div>
+          </FeatureCard>
         ))}
-      </div>
-
-    </section>
+      </div>            
+      </section>
   );
 }
 

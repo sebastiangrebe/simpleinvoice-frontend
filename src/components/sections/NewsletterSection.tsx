@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/Button";
-// import { Input } from "@/components/ui/input";
 import { Mail } from "lucide-react";
 
 export function NewsletterSection() {
@@ -14,11 +13,6 @@ export function NewsletterSection() {
           Bill Your Clients, Receive Payments Quickly!
           </p>
           <div className="mt-8 flex gap-4 justify-center">
-            {/* <Input
-              type="email"
-              placeholder="Enter your email"
-              className="max-w-md bg-white/10 text-primary-foreground placeholder:text-primary-foreground/75"
-            /> */}
             <Button >
               <Mail className="mr-2 h-4 w-4" />
               Try Now

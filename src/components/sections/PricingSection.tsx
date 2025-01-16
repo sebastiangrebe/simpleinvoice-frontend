@@ -4,52 +4,41 @@ import { Check } from "lucide-react";
 
 const tiers = [
   {
-    name: "Starter",
-    price: "$29",
-    description: "Perfect for small teams and startups",
+    name: "Basic Plan",
+    price: "$10",
+    description: "Perfect for small teams with up to 5 users",
     features: [
-      "Up to 5 team members",
-      "Basic analytics",
-      "24/7 email support",
-      "10GB storage",
-      "API access",
+      "Up to 5 users",
+      "Basic invoicing features",
+      "Email support",
     ],
   },
   {
-    name: "Professional",
-    price: "$99",
-    description: "Best for growing businesses",
+    name: "Growth Plan",
+    price: "$10 + $2/user",
+    description: "Ideal for growing teams",
     features: [
-      "Up to 20 team members",
-      "Advanced analytics",
-      "Priority support",
-      "50GB storage",
-      "API access",
-      "Custom integrations",
-      "Team training",
+      "Up to 5 users for $10/month, $2/user above 5",
+      "Advanced invoicing features",
+      "Priority email support",
     ],
     featured: true,
   },
   {
-    name: "Enterprise",
+    name: "Enterprise Plan",
     price: "Custom",
-    description: "For large organizations",
+    description: "For large teams and businesses with complex needs",
     features: [
-      "Unlimited team members",
-      "Enterprise analytics",
-      "24/7 phone support",
-      "Unlimited storage",
-      "API access",
-      "Custom integrations",
-      "Dedicated account manager",
-      "Custom training",
+      "Unlimited users",
+      "All premium invoicing features",
+      "Priority support",
     ],
   },
 ];
 
 export function PricingSection() {
   return (
-    <section className="container py-24 sm:py-32" id="pricing">
+    <section className="px-[9%] container py-24 sm:py-32" id="pricing">
       <div className="text-center">
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
           Simple, Transparent Pricing
@@ -62,7 +51,7 @@ export function PricingSection() {
         {tiers.map((tier) => (
           <Card
             key={tier.name}
-            className={tier.featured ? "border-[2px] border-[#0091ea]  shadow-lg" : ""}
+            className={tier.featured ? "bg-[#d6ebf3] border-[2px] border-[#0091ea]  shadow-lg" : "bg-[#d6ebf3]"}
           >
             <CardHeader>
               <CardTitle>{tier.name}</CardTitle>
