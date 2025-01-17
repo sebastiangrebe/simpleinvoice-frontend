@@ -8,7 +8,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="bg-slate-100">
+    <div className="bg-neutral-100">
       <Header />
       {children}
       <Footer />

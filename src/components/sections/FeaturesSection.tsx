@@ -38,7 +38,7 @@ const steps = [
 
 export function FeaturesSection() {
   return (
-    <section className="container py-24 sm:py-32">
+    <section className="container py-24 sm:py-32"  id="features">
       <div className="text-center">
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
           Generate. Deliver. Receive Payment

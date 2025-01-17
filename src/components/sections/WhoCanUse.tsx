@@ -31,16 +31,16 @@ const tiers = [
 
 export function WhoCanUse() {
     return (
-        <section className="container py-24 sm:py-32" id="pricing">
+        <section className="container py-24 sm:py-32" >
             <div className="text-center">
                 <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
                     Who’s it for?
                 </h2>
-                <p className="mt-4 text-lg text-muted-foreground mx-[30%]">
+                <p className="mt-4 text-lg text-muted-foreground sm:mx-[30%]">
                     Designed to cater to a diverse range of professionals, helping them streamline their invoicing process with ease and efficiency.
                 </p>
             </div>
-            <div className="mt-16 mx-[7%]  grid gap-12 sm:grid-cols-2 lg:grid-cols-2">
+            <div className="mt-16 sm:mx-[7%]  grid gap-12 sm:grid-cols-2 lg:grid-cols-2">
                 {tiers.map((tier) => (
                     <Card
                         className={tier.featured ? " bg-[#d6ebf3] rounded-xl " : ""}

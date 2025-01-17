@@ -3,8 +3,8 @@ import { Mail } from "lucide-react";
 
 export function NewsletterSection() {
   return (
-    <section className="container px-32 py-24 sm:py-32">
-      <div className="relative isolate overflow-hidden bg-primary px-6 py-24 shadow-2xl sm:rounded-3xl sm:px-24">
+    <section className="container md:px-32 py-24 sm:py-32">
+      <div className="relative isolate overflow-hidden bg-primary px-6 py-24 shadow-2xl rounded-xl sm:rounded-3xl sm:px-24">
         <div className="mx-auto max-w-2xl  text-center">
           <h2 className="text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl">
           Start invoicing today!

@@ -12,7 +12,7 @@ const services = [
 
 export function ServicesSection() {
   return (
-    <section className="px-[9%] container py-24 sm:py-32" id="services">
+    <section className="px-[9%] bg-[#d6ebf3] rounded-xl container py-24 sm:py-32" id="services">
       <div className="grid gap-8 lg:grid-cols-[1fr,1fr] lg:gap-16 items-center">
         <div>
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
