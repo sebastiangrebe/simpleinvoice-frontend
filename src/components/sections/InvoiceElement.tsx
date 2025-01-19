@@ -61,7 +61,7 @@ export function InvoiceElement() {
           <Card key={Invoices.name} className="bg-gray-900 border-[4px] pr-4 pt-4 text-slate-100 border-[#0091ea] ">
             <CardTitle className="ml-4 py-4">
               <div className="flex">
-              <div className="bg-[#0191ea] p-2 pl-3 mr-2 w-8 h-8 rounded-full">{Invoices.num}</div>
+              <div className="bg-blue-500 p-2 pl-3 mr-2 w-8 h-8 rounded-full">{Invoices.num}</div>
                 <p className="font-bold text-xl">{Invoices.name}</p>
               </div>
             </CardTitle>
