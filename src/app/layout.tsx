@@ -77,7 +77,7 @@ export default function RootLayout({
             rel="noopener noreferrer"
             className="fixed bottom-4 right-4 flex items-center gap-2 rounded-full bg-white/90 px-2 py-1 text-sm text-gray-600 shadow-lg backdrop-blur hover:bg-white"
           >
-            <Image src="https://www.maturestack.com/icon.png" width={24} height={24} alt="MatureStack Logo" />
+            <Image src="https://www.maturestack.com/icon.png" unoptimized width={24} height={24} alt="MatureStack Logo" />
             Built with MatureStack
           </a>
         </body>
