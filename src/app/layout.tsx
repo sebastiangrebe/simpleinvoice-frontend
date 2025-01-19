@@ -72,13 +72,13 @@ export default function RootLayout({
         >
           {children}
           <a
-            href="https://www.maturestack.com"
+            href="https://www.whatsbill.com"
             target="_blank"
             rel="noopener noreferrer"
             className="fixed bottom-4 right-4 flex items-center gap-2 rounded-full bg-white/90 px-2 py-1 text-sm text-gray-600 shadow-lg backdrop-blur hover:bg-white"
           >
-            <Image src="https://www.maturestack.com/icon.png" width={24} height={24} alt="MatureStack Logo" />
-            Built with MatureStack
+            <Image src="https://www.whatsbill.com/icon.png" width={24} height={24} alt="WhatsBill Logo" />
+            Built with WhatsBill
           </a>
         </body>
       </CSPostHogProvider>

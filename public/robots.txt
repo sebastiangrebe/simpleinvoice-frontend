@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://www.maturestack.com
+Host: https://www.whatsbill.com
 
 # Sitemaps
-Sitemap: https://www.maturestack.com/sitemap.xml
+Sitemap: https://www.whatsbill.com/sitemap.xml

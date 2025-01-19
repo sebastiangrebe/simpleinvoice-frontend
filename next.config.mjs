@@ -16,7 +16,7 @@ const nextConfig = {
             },
             {
                 protocol: 'https',
-                hostname: 'www.maturestack.com',
+                hostname: 'www.whatsbill.com',
                 port: '',
                 pathname: '/**',
             },
@@ -26,8 +26,8 @@ const nextConfig = {
         return [
             {
                 source: '/:path*',
-                has: [{ type: 'header', key: 'host', value: 'maturestack.com' }],
-                destination: 'https://www.maturestack.com/:path*',
+                has: [{ type: 'header', key: 'host', value: 'whatsbill.com' }],
+                destination: 'https://www.whatsbill.com/:path*',
                 permanent: true,
             },
         ];

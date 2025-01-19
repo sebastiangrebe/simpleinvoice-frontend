@@ -10,7 +10,7 @@ export default function TOS() {
 
   <div className="space-y-6">
     <p>
-      Your privacy is important to us. It is MatureStack&apos;s policy to respect your privacy regarding any information we may
+      Your privacy is important to us. It is WhatsBill&apos;s policy to respect your privacy regarding any information we may
       collect from you across our website, and other sites we own and operate.
     </p>
 
@@ -21,7 +21,7 @@ export default function TOS() {
     </p>
 
     <p>
-      You can sign up with your Google account so your MatureStack&apos;s account username will be prefilled with your name and
+      You can sign up with your Google account so your WhatsBill&apos;s account username will be prefilled with your name and
       your public profile picture.
     </p>
 
@@ -38,7 +38,7 @@ export default function TOS() {
 
     <p>
       We act in the capacity of a data controller and a data processor with regard to the personal data processed
-      through MatureStack and the services in terms of the applicable data protection laws, including the EU General Data
+      through WhatsBill and the services in terms of the applicable data protection laws, including the EU General Data
       Protection Regulation (GDPR).
     </p>
 

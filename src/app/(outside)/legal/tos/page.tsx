@@ -9,7 +9,7 @@ export default function TOS() {
             <div>
               <h2 className="text-xl font-semibold mb-2">1. Introduction</h2>
               <p>
-                By using MatureStack you confirm your acceptance of, and agree
+                By using WhatsBill you confirm your acceptance of, and agree
                 to be bound by, these terms and conditions.
               </p>
             </div>
@@ -20,7 +20,7 @@ export default function TOS() {
               </h2>
               <p>
                 This Agreement takes effect on the date on which you first use
-                the MatureStack application.
+                the WhatsBill application.
               </p>
             </div>
 
@@ -29,11 +29,11 @@ export default function TOS() {
                 3. Unlimited Access Software License with Termination Rights
               </h2>
               <p>
-                The MatureStack Software License facilitates the acquisition of
-                MatureStack software through a single purchase, granting users
+                The WhatsBill Software License facilitates the acquisition of
+                WhatsBill software through a single purchase, granting users
                 unrestricted and perpetual access to its comprehensive
                 functionalities. Tailored for independent creators,
-                entrepreneurs, and small businesses, MatureStack empowers users
+                entrepreneurs, and small businesses, WhatsBill empowers users
                 to create compelling web pages and online portfolios.
               </p>
               <p>
@@ -45,7 +45,7 @@ export default function TOS() {
                 to exercise control over software distribution and utilization.
               </p>
               <p>
-                Opting for the MatureStack Software License enables users to
+                Opting for the WhatsBill Software License enables users to
                 enjoy the benefits of the software while recognizing the
                 licensor&apos;s unrestricted termination rights, which provide
                 adaptability and address potential unforeseen circumstances.
@@ -55,7 +55,7 @@ export default function TOS() {
             <div>
               <h2 className="text-xl font-semibold mb-2">4. Refunds</h2>
               <p>
-                Due to the nature of digital products, the MatureStack
+                Due to the nature of digital products, the WhatsBill
                 boilerplate cannot be refunded or exchanged once access is
                 granted.
               </p>
@@ -64,7 +64,7 @@ export default function TOS() {
             <div>
               <h2 className="text-xl font-semibold mb-2">5. Disclaimer</h2>
               <p>
-                It is not warranted that MatureStack will meet your requirements
+                It is not warranted that WhatsBill will meet your requirements
                 or that its operation will be uninterrupted or error free. All
                 express and implied warranties or conditions not stated in this
                 Agreement (including without limitation, loss of profits, loss
@@ -80,28 +80,28 @@ export default function TOS() {
                 6. Warranties and Limitation of Liability
               </h2>
               <p>
-                MatureStack does not give any warranty, guarantee or other term
+                WhatsBill does not give any warranty, guarantee or other term
                 as to the quality, fitness for purpose or otherwise of the
-                software. MatureStack shall not be liable to you by reason of
+                software. WhatsBill shall not be liable to you by reason of
                 any representation (unless fraudulent), or any implied warranty,
                 condition or other term, or any duty at common law, for any loss
                 of profit or any indirect, special or consequential loss,
                 damage, costs, expenses or other claims (whether caused by
-                MatureStack&apos;s negligence or the negligence of its servants
+                WhatsBill&apos;s negligence or the negligence of its servants
                 or agents or otherwise) which arise out of or in connection with
-                the provision of any goods or services by MatureStack.
+                the provision of any goods or services by WhatsBill.
               </p>
               <p>
-                MatureStack shall not be liable or deemed to be in breach of
+                WhatsBill shall not be liable or deemed to be in breach of
                 contract by reason of any delay in performing, or failure to
                 perform, any of its obligations if the delay or failure was due
                 to any cause beyond its reasonable control. Notwithstanding
                 contrary clauses in this Agreement, in the event that
-                MatureStack are deemed liable to you for breach of this
-                Agreement, you agree that MatureStack&apos;s liability is
+                WhatsBill are deemed liable to you for breach of this
+                Agreement, you agree that WhatsBill&apos;s liability is
                 limited to the amount actually paid by you for your services or
                 software, which amount calculated in reliance upon this clause.
-                You hereby release MatureStack from any and all obligations,
+                You hereby release WhatsBill from any and all obligations,
                 liabilities and claims in excess of this limitation.
               </p>
             </div>
@@ -111,7 +111,7 @@ export default function TOS() {
                 7. Responsibilities
               </h2>
               <p>
-                MatureStack is not responsible for what the user does with the
+                WhatsBill is not responsible for what the user does with the
                 user-generated content.
               </p>
             </div>
@@ -121,7 +121,7 @@ export default function TOS() {
                 8. Price Adjustments
               </h2>
               <p>
-                As we continue to improve MatureStack and expand our offerings,
+                As we continue to improve WhatsBill and expand our offerings,
                 the price may increase. The discount is provided to help
                 customers secure the current price without being surprised by
                 future increases.
@@ -135,10 +135,10 @@ export default function TOS() {
               <p>
                 This Agreement is governed by the laws of Singapore. You
                 acknowledge that no joint venture, partnership, employment, or
-                agency relationship exists between you and MatureStack as a
+                agency relationship exists between you and WhatsBill as a
                 result of your use of these services. You agree not to hold
                 yourself out as a representative, agent or employee of
-                MatureStack. You agree that MatureStack will not be liable by
+                WhatsBill. You agree that WhatsBill will not be liable by
                 reason of any representation, act or omission to act by you.
               </p>
             </div>
