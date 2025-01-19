@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Check } from "lucide-react";
+import Link from "next/link";
 
 const tiers = [
   {
@@ -24,16 +25,16 @@ const tiers = [
     ],
     featured: true,
   },
-  {
-    name: "Enterprise Plan",
-    price: "Custom",
-    description: "For large teams and businesses with complex needs",
-    features: [
-      "Unlimited users",
-      "All premium invoicing features",
-      "Priority support",
-    ],
-  },
+  // {
+  //   name: "Enterprise Plan",
+  //   price: "Custom",
+  //   description: "For large teams and businesses with complex needs",
+  //   features: [
+  //     "Unlimited users",
+  //     "All premium invoicing features",
+  //     "Priority support",
+  //   ],
+  // },
 ];
 
 export function PricingSection() {
@@ -47,12 +48,17 @@ export function PricingSection() {
           Choose the plan that&apos;s right for you
         </p>
       </div>
-      <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-16 gap-8 align-center justify-center flex flex-wrap">
         {tiers.map((tier) => (
           <Card
             key={tier.name}
-            className={tier.featured ? "bg-[#d6ebf3] border-[2px] border-[#0091ea]  shadow-lg" : "bg-[#d6ebf3]"}
+            className={tier.featured ? "md:flex-1 relative bg-blue-100 border-[2px] border-[#0091ea] shadow-lg overflow-hidden" : "overflow-hidden md:flex-1 bg-blue-100"}
           >
+            {tier.featured && (
+              <div className="absolute top-0 right-0 bg-[#0091ea] text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+                Most Popular
+              </div>
+            )}
             <CardHeader>
               <CardTitle>{tier.name}</CardTitle>
               <CardDescription>{tier.description}</CardDescription>
@@ -70,9 +76,11 @@ export function PricingSection() {
               </ul>
             </CardContent>
             <CardFooter>
-              <Button className="w-full" variant={tier.featured ? "default" : "outline"}>
-                Get Started
-              </Button>
+              <Link href="/#waitlist">
+                <Button className="w-full" variant={tier.featured ? "default" : "outline"}>
+                  Get Started
+                </Button>
+              </Link>
             </CardFooter>
           </Card>
         ))}

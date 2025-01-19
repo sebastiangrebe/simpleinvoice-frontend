@@ -4,8 +4,6 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { HowItWorksSection } from "@/components/sections/HowItWorksSection";
 import { NewsletterSection } from "@/components/sections/NewsletterSection";
 import { PricingSection } from "@/components/sections/PricingSection";
-import { ServicesSection } from "@/components/sections/ServicesSection";
-import { InvoiceElement } from "@/components/sections/InvoiceElement";
 import { WhoCanUse } from "@/components/sections/WhoCanUse";
 
 function Home() {
@@ -16,8 +14,6 @@ function Home() {
         <HowItWorksSection />
         <WhoCanUse/>
         <NewsletterSection />
-        <ServicesSection />
-        <InvoiceElement />
         <PricingSection />
         <FAQSection />
       </main>

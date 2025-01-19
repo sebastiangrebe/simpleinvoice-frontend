@@ -18,24 +18,24 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "MatureStack - Modern Web Development Templates",
-  description: "Production-ready templates and boilerplates for modern web development. Built with Next.js, TypeScript, and best practices for scalable applications.",
-  keywords: ["web development", "templates", "boilerplate", "Next.js", "TypeScript", "React", "full-stack"],
+  title: "WhatsBill - Simplify Your Billing Process",
+  description: "Effortlessly manage invoices and bills with WhatsBill. A user-friendly platform designed for small businesses and freelancers.",
+  keywords: ["billing", "invoicing", "small business", "freelancers", "invoice management", "easy billing", "WhatsBill"],
   authors: [{ name: "Sebastian Grebe", url: "https://sebastian-grebe.com" }],
   creator: "Sebastian Grebe",
   publisher: "Sebastian Grebe",
-  metadataBase: new URL("https://www.maturestack.com"),
+  metadataBase: new URL("https://www.whatsbill.com"),
   openGraph: {
-    title: "MatureStack - Modern Web Development Templates",
-    description: "Production-ready templates and boilerplates for modern web development",
-    url: "https://www.maturestack.com",
-    siteName: "MatureStack",
+    title: "WhatsBill - Simplify Your Billing Process",
+    description: "Effortlessly manage invoices and bills with WhatsBill. A user-friendly platform designed for small businesses and freelancers.",
+    url: "https://www.whatsbill.com",
+    siteName: "WhatsBill",
     images: [
       {
-        url: "https://www.maturestack.com/icon.png", // Make sure this image exists
+        url: "https://www.whatsbill.com/api/og", // Open Graph API route for the preview image
         width: 1200,
         height: 630,
-        alt: "MatureStack - Modern Web Development Templates",
+        alt: "WhatsBill - Simplify Your Billing Process",
       },
     ],
     locale: "en_US",
@@ -43,15 +43,21 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "MatureStack - Modern Web Development Templates",
-    description: "Production-ready templates and boilerplates for modern web development",
-    images: ["https://www.maturestack.com/icon.png"], // Make sure this image exists
+    title: "WhatsBill - Simplify Your Billing Process",
+    description: "Effortlessly manage invoices and bills with WhatsBill. A user-friendly platform designed for small businesses and freelancers.",
+    images: ["https://www.whatsbill.com/api/og"], // Twitter uses the same OG API route
   },
   robots: {
     index: true,
     follow: true,
   },
+  viewport: "width=device-width, initial-scale=1.0",
+  themeColor: "#0052cc", // WhatsBill's brand color
+  alternates: {
+    canonical: "https://www.whatsbill.com",
+  },
 };
+
 
 export default function RootLayout({
   children,
