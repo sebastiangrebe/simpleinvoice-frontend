@@ -62,7 +62,7 @@ export async function GET() {
 
         {/* Logo */}
         <img
-          src="http://localhost:3001/icon.png" // Replace with your actual logo URL
+          src="https://www.whatsbill.com/icon.png" // Replace with your actual logo URL
           alt="WhatsBill Logo"
           style={{
             width: '120px',
