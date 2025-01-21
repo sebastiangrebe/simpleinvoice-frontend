@@ -4,7 +4,7 @@ import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { Building2, MapPin, Receipt, ArrowRight, ArrowLeft, Upload, CheckCircle2, Building, Briefcase, ClipboardCheck } from "lucide-react";
+import { Building2, MapPin, Receipt, ArrowRight, ArrowLeft, Upload, CheckCircle2, Building, Briefcase, ClipboardCheck, CrossIcon } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/input";
 
@@ -24,6 +24,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+
 
 const formSchema = z.object({
   companyName: z.string().min(2, "Company name must be at least 2 characters"),
@@ -51,6 +52,19 @@ const steps = [
 export default function OnboardingPage() {
   const [step, setStep] = useState(0);
   const [logoPreview, setLogoPreview] = useState("");
+
+  const [isSubscribed, setIsSubscribed] = useState(false); 
+  const [showPaywall, setShowPaywall] = useState(false);
+
+
+
+  const handleGoToDashboard = () => {
+    if (isSubscribed) {
+      window.location.href = '/app/dashboard'; 
+    } else {
+      setShowPaywall(true);
+    }
+  };
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -612,7 +626,7 @@ export default function OnboardingPage() {
                     </Button>
                     <Button
                       type="button"
-                      onClick={() => window.location.href = "/dashboard"}
+                      onClick={handleGoToDashboard}
                       className="bg-blue-600 hover:bg-blue-700 text-white"
                     >
                       Go to Dashboard
