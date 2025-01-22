@@ -38,8 +38,8 @@ export function MobileNav() {
             </Link>
           ))}
           <div className="mt-4 flex flex-col gap-2">
-            {/* <Link href="/signin"><Button variant="ghost">Sign In</Button></Link> */}
-            <Link href="/#waitlist"><Button>Get Started</Button></Link>
+            <Link href="/signin"><Button>Get Started</Button></Link>
+            {/* <Link href="/#waitlist"><Button>Get Started</Button></Link> */}
           </div>
         </nav>
       </SheetContent>
