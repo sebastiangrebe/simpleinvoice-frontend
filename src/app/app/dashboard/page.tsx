@@ -14,6 +14,7 @@ import {
   Users,
   FileText,
 } from "lucide-react";
+import { mockInvoices } from "./data/mockData";
 
 const mockStats = [
   {
@@ -104,14 +105,14 @@ function DashboardContent() {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {mockRecentInvoices.map((invoice) => (
+            {mockInvoices.map((invoice) => (
               <div
                 key={invoice.id}
                 className="flex items-center justify-between border-b pb-4 last:border-0 last:pb-0"
               >
                 <div>
-                  <div className="font-medium">{invoice.customer}</div>
-                  <div className="text-sm text-gray-500">{invoice.id}</div>
+                  <div className="font-medium">{invoice.customerName}</div>
+                  <div className="text-sm text-gray-500">{invoice.invoiceNumber}</div>
                 </div>
                 <div className="text-right">
                   <div className="font-medium">{invoice.amount}</div>

@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 import { Settings, Bell, Mail, Palette } from "lucide-react";
 
 export function SettingsContent() {
@@ -39,7 +40,7 @@ export function SettingsContent() {
                   Receive notifications about your invoices via email
                 </p>
               </div>
-
+              <Switch />
             </div>
             <div className="flex items-center justify-between">
               <div className="space-y-0.5">
@@ -48,10 +49,10 @@ export function SettingsContent() {
                   Receive notifications in your browser
                 </p>
               </div>
+              <Switch />
             </div>
           </CardContent>
         </Card>
-
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -77,9 +78,32 @@ export function SettingsContent() {
                   Receive a copy of all sent emails
                 </p>
               </div>
+              <Switch />
             </div>
           </CardContent>
         </Card>
+        {/* <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Palette className="h-5 w-5" />
+              Appearance
+            </CardTitle>
+            <CardDescription>
+              Customize the look and feel of your dashboard
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div className="space-y-0.5">
+                <Label>Dark Mode</Label>
+                <p className="text-sm text-gray-500">
+                  Switch between light and dark theme
+                </p>
+              </div>
+              <Switch />
+            </div>
+          </CardContent>
+        </Card> */}
 
         <div className="flex justify-center">
           <Button>Save Changes</Button>

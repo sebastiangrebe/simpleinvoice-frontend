@@ -20,8 +20,6 @@ import {
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/Card";
-import { SkeletonCard } from "@/components/dashboard/DashboardSkeleton";
-import { Skeleton } from "@/components/ui/skeleton";
 
 const navigation = [
   { name: "Dashboard", href: "/app/dashboard", icon: LayoutDashboard },

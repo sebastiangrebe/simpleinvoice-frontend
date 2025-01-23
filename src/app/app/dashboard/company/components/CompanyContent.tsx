@@ -11,11 +11,13 @@ import {
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Building2, MapPin, Receipt } from "lucide-react";
+import { Building2, MapPin, Receipt, Upload, Edit2 } from "lucide-react";
+import Image from "next/image";
+import { LogoEditDialog } from "./LogoEditDialog";
 
 interface CompanyFormData {
   name: string;
-  logo: string;
+  logo: string | null;
   businessType: string;
   streetAddress: string;
   city: string;
@@ -29,7 +31,7 @@ interface CompanyFormData {
 export function CompanyContent() {
   const [formData, setFormData] = useState<CompanyFormData>({
     name: "Acme Corporation",
-    logo: "https://via.placeholder.com/150",
+    logo: null,
     businessType: "Corporation",
     streetAddress: "123 Business Ave",
     city: "Metropolis",
@@ -39,6 +41,8 @@ export function CompanyContent() {
     taxId: "12-3456789",
     vatNumber: "VAT123456",
   });
+  const [previewLogo, setPreviewLogo] = useState<string | null>(null);
+  const [isLogoDialogOpen, setIsLogoDialogOpen] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -48,9 +52,26 @@ export function CompanyContent() {
     }));
   };
 
+  const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result as string;
+        setPreviewLogo(base64String);
+        setFormData(prev => ({ ...prev, logo: base64String }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleLogoUpdate = (newLogo: string) => {
+    setFormData(prev => ({ ...prev, logo: newLogo }));
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
+    // Handle form submission here
     console.log("Form submitted:", formData);
   };
 
@@ -68,7 +89,48 @@ export function CompanyContent() {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Logo Upload Section */}
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold">Company Logo</h3>
+              <div className="flex items-center gap-6">
+                <div className="relative w-48 h-32 border rounded-lg flex items-center justify-center group">
+                  {formData.logo ? (
+                    <>
+                      <Image
+                        src={formData.logo}
+                        alt="Company Logo"
+                        fill
+                        className="object-contain"
+                      />
+                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="text-white"
+                          onClick={() => setIsLogoDialogOpen(true)}
+                        >
+                          <Edit2 className="h-5 w-5 mr-2" />
+                          Edit Logo
+                        </Button>
+                      </div>
+                    </>
+                  ) : (
+                    <Button
+                      variant="ghost"
+                      className="text-gray-500 h-full w-full"
+                      onClick={() => setIsLogoDialogOpen(true)}
+                    >
+                      <div>
+                        <Upload className="w-12 h-12 mx-auto mb-2" />
+                        <span className="text-sm">Upload Logo</span>
+                      </div>
+                    </Button>
+                  )}
+                </div>
+              </div>
+            </div>
 
+            {/* Company Information Section */}
             <div className="space-y-4">
               <h3 className="text-lg font-semibold">Company Information</h3>
               <div className="grid gap-4 md:grid-cols-2">
@@ -93,7 +155,7 @@ export function CompanyContent() {
               </div>
             </div>
 
-
+            {/* Address Section */}
             <div className="space-y-4">
               <h3 className="text-lg font-semibold flex items-center gap-2">
                 <MapPin className="h-5 w-5" />
@@ -148,6 +210,7 @@ export function CompanyContent() {
               </div>
             </div>
 
+            {/* Tax Information Section */}
             <div className="space-y-4">
               <h3 className="text-lg font-semibold flex items-center gap-2">
                 <Receipt className="h-5 w-5" />
@@ -175,12 +238,19 @@ export function CompanyContent() {
               </div>
             </div>
 
-            <div className="flex justify-center">
+            <div className="flex justify-end">
               <Button type="submit">Save Changes</Button>
             </div>
           </form>
         </CardContent>
       </Card>
+
+      <LogoEditDialog
+        isOpen={isLogoDialogOpen}
+        onClose={() => setIsLogoDialogOpen(false)}
+        currentLogo={formData.logo}
+        onSave={handleLogoUpdate}
+      />
     </div>
   );
 } 
