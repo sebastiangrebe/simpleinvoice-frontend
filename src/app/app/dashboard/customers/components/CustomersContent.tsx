@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -11,6 +11,8 @@ import { Users, Plus, Search, Mail, Phone, MapPin, Building2, ArrowUpRight, Eye 
 import { CustomerDialog } from "./CustomerDialog";
 import { Customer } from "../../types/customer";
 import { mockCustomers } from "../../data/mockData";
+import axios from "axios";
+import apiClient from "@/services/apiClient";
 
 
 
@@ -35,28 +37,35 @@ export function CustomersContent({ searchQuery, setSearchQuery }: CustomersConte
     setIsDialogOpen(true);
   };
 
-  const handleSaveCustomer = (updatedCustomer: Customer) => {
-    // Update customers list
-    setCustomers(prevCustomers => {
-      if (updatedCustomer.id) {
-        // Update existing customer
-        return prevCustomers.map(c => 
-          c.id === updatedCustomer.id ? updatedCustomer : c
-        );
-      } else {
-        // Add new customer
-        return [...prevCustomers, { ...updatedCustomer, id: String(Date.now()) }];
-      }
-    });
-    
-    setIsDialogOpen(false);
-    setSelectedCustomer(null);
+
+  useEffect(() => {
+    const fetchCustomers = async () => {
+      const response = await fetch('/customers'); 
+      const data = await response.json();
+      setCustomers(data);
+    };
+
+    fetchCustomers();
+  }, []);
+
+  const handleSaveCustomer = async (customer: Customer) => {
+    try {
+        const { data } = await apiClient.post('/customers', customer);
+        setCustomers((prev) => [...prev, data]);
+    } catch (error) {
+      console.error('Error saving customer:', error);
+    } finally {
+      setIsDialogOpen(false);
+    }
   };
 
-  const handleDeleteCustomer = (customerId: string) => {
-    setCustomers(prevCustomers => 
-      prevCustomers.filter(customer => customer.id !== customerId)
-    );
+  const handleDeleteCustomer = async (customerId: string) => {
+    try {
+      await axios.delete(`/customers/${customerId}`);
+      setCustomers((prev) => prev.filter((c) => c.id !== customerId));
+    } catch (error) {
+      console.error('Error deleting customer:', error);
+    }
   };
 
   return (

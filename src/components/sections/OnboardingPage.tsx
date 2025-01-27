@@ -7,6 +7,7 @@ import * as z from "zod";
 import { Building2, MapPin, Receipt, ArrowRight, ArrowLeft, Upload, CheckCircle2, Building, Briefcase, ClipboardCheck, CrossIcon } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation"
 
 import {
   Card,
@@ -24,11 +25,12 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import apiClient from "@/services/apiClient";
 
 
 const formSchema = z.object({
   companyName: z.string().min(2, "Company name must be at least 2 characters"),
-  businessType: z.string().min(2, "Please select a business type"),
+  businessType: z.string().min(2, "Please select a business type").optional(),
   logo: z.string().optional(),
   streetAddress: z.string().min(5, "Please enter a valid street address"),
   city: z.string().min(2, "Please enter a valid city"),
@@ -51,20 +53,50 @@ const steps = [
 
 export default function OnboardingPage() {
   const [step, setStep] = useState(0);
+  const router = useRouter();
   const [logoPreview, setLogoPreview] = useState("");
 
   const [isSubscribed, setIsSubscribed] = useState(false); 
   const [showPaywall, setShowPaywall] = useState(false);
+  const [isLoading, setIsLoading] =    useState<boolean>(false)
 
+  async function handleGoToDashboard(event: React.SyntheticEvent) {
+    event.preventDefault();
+    setIsLoading(true); 
+  
+    try {
+      const formData = form.getValues();
+  
+      // // Check if the user is authenticated
+      // const isAuthenticated = await apiClient.get("/auth/check-session"); // Endpoint to check session validity
+      // if (!isAuthenticated.data?.isLoggedIn) {
+      //   throw new Error("You must be logged in to complete the onboarding.");
+      // }
+  
 
-
-  const handleGoToDashboard = () => {
-    if (isSubscribed) {
-      window.location.href = '/app/dashboard'; 
-    } else {
-      setShowPaywall(true);
+      const { data } = await apiClient.post("/onboarding", {
+        companyName: formData.companyName,
+        businessType: formData.businessType,
+        logo: formData.logo,
+        streetAddress: formData.streetAddress,
+        city: formData.city,
+        state: formData.state,
+        zipCode: formData.zipCode,
+        country: formData.country,
+        taxId: formData.taxId,
+        vatNumber: formData.vatNumber || null, 
+      });
+  
+      router.push("/app/dashboard");
+    } catch (error) {
+      console.error("Error during onboarding:", error);
+      // toast.error(error.response?.data?.message || "Something went wrong. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
-  };
+  }
+
+
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
