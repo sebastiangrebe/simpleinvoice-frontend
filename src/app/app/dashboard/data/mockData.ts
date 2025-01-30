@@ -1,5 +1,9 @@
+
 import { Customer } from "../types/customer";
 import { Invoice } from "../types/invoice";
+
+
+
 
 export const mockCustomers: Customer[] = [
     {

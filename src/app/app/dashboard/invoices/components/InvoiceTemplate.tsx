@@ -1,6 +1,5 @@
-import { Invoice } from "@/app/types/invoice";
-import { DollarSign } from "lucide-react";
-import Image from "next/image";
+import { Invoice } from "../../types/invoice";
+
 
 interface InvoiceTemplateProps {
   invoice: Invoice;

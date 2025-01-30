@@ -1,20 +1,15 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import {
-  Card,
-  CardContent,
-} from "@/components/ui/Card";
+import { Card, CardContent } from "@/components/ui/Card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/Button";
-import { Users, Plus, Search, Mail, Phone, MapPin, Building2, ArrowUpRight, Eye } from "lucide-react";
+import { Users, Plus, Search, Mail, Phone, MapPin, Building2, Eye } from "lucide-react";
 import { CustomerDialog } from "./CustomerDialog";
 import { Customer } from "../../types/customer";
-import { mockCustomers } from "../../data/mockData";
-import axios from "axios";
 import apiClient from "@/services/apiClient";
-
-
+import useCustomers from "@/hooks/useCustomers";
+import { useRouter } from "next/navigation";
 
 interface CustomersContentProps {
   searchQuery: string;
@@ -22,9 +17,10 @@ interface CustomersContentProps {
 }
 
 export function CustomersContent({ searchQuery, setSearchQuery }: CustomersContentProps) {
-  const [customers, setCustomers] = useState<Customer[]>(mockCustomers);
+  const { customers, setCustomers } = useCustomers();
   const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const router = useRouter();
 
   const filteredCustomers = customers.filter((customer) =>
     customer.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -33,38 +29,18 @@ export function CustomersContent({ searchQuery, setSearchQuery }: CustomersConte
   );
 
   const handleCustomerClick = (customer: Customer) => {
-    setSelectedCustomer(customer);
-    setIsDialogOpen(true);
+    router.push(`/app/dashboard/customers/${customer._id}`);
   };
-
-
-  useEffect(() => {
-    const fetchCustomers = async () => {
-      const response = await fetch('/customers'); 
-      const data = await response.json();
-      setCustomers(data);
-    };
-
-    fetchCustomers();
-  }, []);
 
   const handleSaveCustomer = async (customer: Customer) => {
     try {
-        const { data } = await apiClient.post('/customers', customer);
-        setCustomers((prev) => [...prev, data]);
+      console.log(customer);
+      const response = await apiClient.post('/customers', customer);
+      setCustomers((prev) => [...prev, response.data]);
     } catch (error) {
       console.error('Error saving customer:', error);
     } finally {
       setIsDialogOpen(false);
-    }
-  };
-
-  const handleDeleteCustomer = async (customerId: string) => {
-    try {
-      await axios.delete(`/customers/${customerId}`);
-      setCustomers((prev) => prev.filter((c) => c.id !== customerId));
-    } catch (error) {
-      console.error('Error deleting customer:', error);
     }
   };
 
@@ -77,7 +53,6 @@ export function CustomersContent({ searchQuery, setSearchQuery }: CustomersConte
         </div>
         <Button onClick={() => {
           setSelectedCustomer({
-            id: String(Date.now()), // Temporary ID for new customer
             name: '',
             email: '',
             phone: '',
@@ -109,8 +84,8 @@ export function CustomersContent({ searchQuery, setSearchQuery }: CustomersConte
 
       <div className="grid gap-4">
         {filteredCustomers.map((customer) => (
-          <Card 
-            key={customer.id} 
+          <Card
+            key={customer._id} // Use customer._id as the key
             className="hover:shadow-md transition-shadow cursor-pointer"
             onClick={() => handleCustomerClick(customer)}
           >
@@ -121,18 +96,6 @@ export function CustomersContent({ searchQuery, setSearchQuery }: CustomersConte
                     <div>
                       <div className="flex items-center gap-2">
                         <h3 className="text-lg font-semibold">{customer.name}</h3>
-                        <Button 
-                          variant="ghost" 
-                          size="sm"
-                          className="text-xs text-muted-foreground hover:text-primary flex items-center gap-1"
-                          onClick={(e) => {
-                            e.stopPropagation(); // Prevent card click event
-                            handleCustomerClick(customer);
-                          }}
-                        >
-                          <Eye className="h-3 w-3" />
-                          <span>View/Edit</span>
-                        </Button>
                       </div>
                       <div className="flex items-center gap-2 text-sm text-gray-500">
                         <Mail className="h-4 w-4" />
@@ -190,8 +153,7 @@ export function CustomersContent({ searchQuery, setSearchQuery }: CustomersConte
           setSelectedCustomer(null);
         }}
         onSave={handleSaveCustomer}
-        onDelete={handleDeleteCustomer}
       />
     </div>
   );
-} 
+}

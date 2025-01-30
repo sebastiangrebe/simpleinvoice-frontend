@@ -14,7 +14,7 @@ export interface InvoiceItem {
 
 export interface Invoice {
   // Header
-  id: string;
+  _id?: string;
   invoiceNumber: string;
   dateIssued: string;
   dueDate: string;
@@ -28,6 +28,7 @@ export interface Invoice {
   companyTaxId: string;
 
   // Client Information
+  customerId: string;
   customerName: string;
   customerAddress: string;
   customerPhone: string;
