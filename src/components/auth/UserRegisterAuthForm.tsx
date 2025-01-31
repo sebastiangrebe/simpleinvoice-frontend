@@ -8,19 +8,26 @@ import { Button } from "@/components/ui/Button"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import apiClient from "@/services/apiClient"
+import { useRouter } from 'next/navigation'
 
 export function UserRegisterAuthForm({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
+  const router = useRouter()
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault()
     setIsLoading(true)
     try {
       const form = event.target as HTMLFormElement;
-      await apiClient.post('auth/register', {
+      const response = await apiClient.post('auth/register', {
         email: (form.elements.namedItem('email') as HTMLInputElement).value,
         password: (form.elements.namedItem('password') as HTMLInputElement).value,
       })
+      if (response.status === 201) {
+        router.push('/signin');
+      } else {
+        alert("Password should be strict");
+      }
     } finally {
       setIsLoading(false)
     }

@@ -29,8 +29,8 @@ export function DesktopNav() {
         </NavigationMenuList>
       </NavigationMenu>
       <div className="flex items-center gap-4">
-        {/* <Link href="/signin"><Button variant="ghost">Sign In</Button></Link> */}
-        <Link href="/#waitlist"><Button>Get Started</Button></Link>
+        <Link href="/signin"><Button>Get Started</Button></Link>
+        {/* <Link href="/#waitlist"><Button>Get Started</Button></Link> */}
       </div>
     </div>
   );

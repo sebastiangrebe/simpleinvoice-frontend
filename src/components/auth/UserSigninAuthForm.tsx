@@ -27,7 +27,7 @@ export function UserSigninAuthForm({ className, ...props }: React.HTMLAttributes
       if (data) {
         localStorage.setItem('access_token', data.access_token)
       }
-      router.push('/app/dashboard')
+      router.push('/onboarding');
     } finally {
       setIsLoading(false)
     }
