@@ -27,7 +27,6 @@ import {
 } from "@/components/ui/form";
 import apiClient from "@/services/apiClient";
 
-
 const formSchema = z.object({
   companyName: z.string().min(2, "Company name must be at least 2 characters"),
   businessType: z.string().min(2, "Please select a business type").optional(),
@@ -37,9 +36,12 @@ const formSchema = z.object({
   state: z.string().min(2, "Please enter a valid state"),
   zipCode: z.string().min(5, "Please enter a valid ZIP code"),
   country: z.string().min(2, "Please enter a valid country"),
+  companyPhone: z.string().min(10, "Please enter a valid phone number"),
+  companyEmail: z.string().email("Please enter a valid email address"),
   taxId: z.string().min(9, "Please enter a valid tax ID"),
   vatNumber: z.string().optional(),
 });
+
 
 const steps = [
   { title: "Welcome", icon: Building },
@@ -56,23 +58,23 @@ export default function OnboardingPage() {
   const router = useRouter();
   const [logoPreview, setLogoPreview] = useState("");
 
-  const [isSubscribed, setIsSubscribed] = useState(false); 
+  const [isSubscribed, setIsSubscribed] = useState(false);
   const [showPaywall, setShowPaywall] = useState(false);
-  const [isLoading, setIsLoading] =    useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   async function handleGoToDashboard(event: React.SyntheticEvent) {
     event.preventDefault();
-    setIsLoading(true); 
-  
+    setIsLoading(true);
+
     try {
       const formData = form.getValues();
-  
+
       // // Check if the user is authenticated
       // const isAuthenticated = await apiClient.get("/auth/check-session"); // Endpoint to check session validity
       // if (!isAuthenticated.data?.isLoggedIn) {
       //   throw new Error("You must be logged in to complete the onboarding.");
       // }
-  
+
 
       const { data } = await apiClient.post("/onboarding", {
         companyName: formData.companyName,
@@ -83,10 +85,12 @@ export default function OnboardingPage() {
         state: formData.state,
         zipCode: formData.zipCode,
         country: formData.country,
+        companyPhone: formData.companyPhone,
+        companyEmail: formData.companyEmail,
         taxId: formData.taxId,
-        vatNumber: formData.vatNumber || null, 
+        vatNumber: formData.vatNumber || null,
       });
-  
+
       router.push("/app/dashboard");
     } catch (error) {
       console.error("Error during onboarding:", error);
@@ -95,7 +99,6 @@ export default function OnboardingPage() {
       setIsLoading(false);
     }
   }
-
 
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -109,10 +112,13 @@ export default function OnboardingPage() {
       state: "",
       zipCode: "",
       country: "",
+      companyPhone: "",
+      companyEmail: "",
       taxId: "",
       vatNumber: "",
     },
   });
+
 
   const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -271,7 +277,6 @@ export default function OnboardingPage() {
                   </CardFooter>
                 </Card>
               )}
-
               {step === 2 && (
                 <Card className="border-0 shadow-xl bg-white/80 backdrop-blur">
                   <CardHeader>
@@ -279,6 +284,7 @@ export default function OnboardingPage() {
                     <CardDescription>This will appear on your invoices and profile</CardDescription>
                   </CardHeader>
                   <CardContent>
+                    {/* Company Name */}
                     <FormField
                       control={form.control}
                       name="companyName"
@@ -295,6 +301,42 @@ export default function OnboardingPage() {
                         </FormItem>
                       )}
                     />
+
+                    <div className="grid grid-cols-2 mt-10 gap-10">
+                      <FormField
+                        control={form.control}
+                        name="companyPhone"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Phone Number</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="Enter your company phone number"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="companyEmail"
+                        render={({ field }) => (
+                          <FormItem>
+                             <FormLabel>Company Email</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="Enter your company email"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
                   </CardContent>
                   <CardFooter className="flex justify-between pt-6 border-t">
                     <Button

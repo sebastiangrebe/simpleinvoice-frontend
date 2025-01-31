@@ -1,7 +1,5 @@
 'use client'
 
-
-
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { Invoice } from "../../types/invoice";
@@ -44,7 +42,7 @@ export default function InvoiceDetails() {
     const handleDeleteInvoice = async (invoiceId: string) => {
         try {
             await apiClient.delete(`/invoices/${invoiceId}`);
-            router.push("/app/dashboard/invoices"); // Redirect to the invoices list page
+            router.push("/app/dashboard/invoices"); 
         } catch (error) {
             console.error("Error deleting invoice:", error);
         }
@@ -62,7 +60,7 @@ export default function InvoiceDetails() {
                     onClick={() => router.back()}
                 >
                     <ArrowLeft className="h-4 w-4 mr-2" />
-                    Back to Customers
+                    Back to Invoices
                 </Button>
                 <Button onClick={() => setIsDialogOpen(true)}>
                     Edit Invoice

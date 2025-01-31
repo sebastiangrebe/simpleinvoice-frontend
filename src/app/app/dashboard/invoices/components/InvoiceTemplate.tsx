@@ -33,11 +33,11 @@ export function InvoiceTemplate({ invoice }: InvoiceTemplateProps) {
           <h1 className="text-3xl font-bold text-gray-800">INVOICE</h1>
           <p className="text-gray-600">Invoice Number: {invoice.invoiceNumber}</p>
         </div>
-        <div className="text-right">
+        {/* <div className="text-right">
           <div className="w-32 h-12 bg-gray-200 flex items-center justify-center">
             <p className="text-center">Company Logo</p>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Dates */}

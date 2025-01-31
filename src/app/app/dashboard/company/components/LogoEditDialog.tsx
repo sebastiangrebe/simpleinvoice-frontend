@@ -1,10 +1,13 @@
 import { useState, useCallback } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Upload, X, RotateCw, ZoomIn, ZoomOut, Trash2 } from "lucide-react";
 import Image from "next/image";
+import useCompany from "@/hooks/useCompany";
+import apiClient from "@/services/apiClient";
+
 
 interface LogoEditDialogProps {
   isOpen: boolean;
@@ -18,6 +21,7 @@ export function LogoEditDialog({ isOpen, onClose, currentLogo, onSave }: LogoEdi
   const [isDragging, setIsDragging] = useState(false);
   const [rotation, setRotation] = useState(0);
   const [zoom, setZoom] = useState(1);
+  const { company, setCompany } = useCompany();
 
   const handleDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -36,11 +40,32 @@ export function LogoEditDialog({ isOpen, onClose, currentLogo, onSave }: LogoEdi
     };
     reader.readAsDataURL(file);
   };
-
-  const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleLogoUploadAndSave = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) handleFileUpload(file);
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onloadend = async () => {
+        const base64String = reader.result as string;
+        setPreviewLogo(base64String); 
+
+        try {
+          const companyId = company?._id;
+          const response = await apiClient.put(`/onboarding/${companyId}`, { logo: base64String });
+
+          setCompany(response.data);
+          onSave(base64String);
+          onClose();
+        } catch (error) {
+          console.error("Error updating logo in the database:", error);
+        }
+      };
+
+      reader.readAsDataURL(file);
+    }
   };
+
+
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -123,7 +148,7 @@ export function LogoEditDialog({ isOpen, onClose, currentLogo, onSave }: LogoEdi
               id="logo-upload"
               type="file"
               accept="image/*"
-              onChange={handleLogoUpload}
+              onChange={handleLogoUploadAndSave}
               className="w-full"
             />
             <p className="text-sm text-gray-500">

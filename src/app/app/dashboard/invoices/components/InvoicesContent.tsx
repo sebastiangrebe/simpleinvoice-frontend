@@ -1,13 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Card,
-  CardContent,
-} from "@/components/ui/Card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/Button";
-import { FileText, Plus, Search, Calendar, DollarSign,Download, Share2 } from "lucide-react";
+import { FileText, Plus, Search} from "lucide-react";
 import { InvoiceDialog } from "./InvoiceDialog";
 import { Invoice } from "../../types/invoice";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -15,6 +11,8 @@ import apiClient from "@/services/apiClient";
 import { useRouter } from "next/navigation";
 import useInvoices from "@/hooks/useInvoices";
 import useCustomers from "@/hooks/useCustomers";
+import InvoiceBox from "./InvoiceBox";
+import useCompany from "@/hooks/useCompany";
 
 interface InvoicesContentProps {
   searchQuery: string;
@@ -23,47 +21,47 @@ interface InvoicesContentProps {
 
 export function InvoicesContent({ searchQuery, setSearchQuery }: InvoicesContentProps) {
   const { invoices, setInvoices } = useInvoices();
+    const {company} = useCompany();
   const { customers } = useCustomers();
   const [selectedInvoice, setSelectedInvoice] = useState<Invoice | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [customerFilter, setCustomerFilter] = useState<string>('all');
-  const router = useRouter();
 
-
-
-  const handleCustomerClick = (invoices: Invoice) => {
-    router.push(`/app/dashboard/invoices/${invoices._id}`);
-  };
 
   const handleCreateInvoice = () => {
-    setSelectedInvoice({
-      invoiceNumber: `INV-${new Date().getFullYear()}-${String(invoices.length + 1).padStart(3, '0')}`,
-      dateIssued: new Date().toISOString().split('T')[0] || '',
-      dueDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] || '',
-      companyName: 'Your Company',
-      companyAddress: 'Your Address',
-      companyPhone: 'Your Phone',
-      companyEmail: 'your@email.com',
-      companyTaxId: 'Your Tax ID',
-      customerId: '',
-      customerName: '',
-      customerAddress: '',
-      customerPhone: '',
-      customerEmail: '',
-      items: [],
-      subtotal: 0,
-      taxAmount: 0,
-      amount: 0,
-      paymentTerms: 'Net 30',
-      paymentMethods: ['Bank Transfer'],
-      bankDetails: '',
-      paymentInstructions: '',
-      status: 'pending'
-    });
-    setIsDialogOpen(true);
+    if (company) {
+      setSelectedInvoice({
+        invoiceNumber: `INV-${new Date().getFullYear()}-${String(invoices.length + 1).padStart(3, '0')}`,
+        dateIssued: new Date().toISOString().split('T')[0] || '',
+        dueDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] || '',
+        companyName: company?.companyName || 'Your Company', 
+        companyAddress: company ? `${company.streetAddress}, ${company.city}, ${company.state}, ${company.zipCode}, ${company.country}`: 'Your Address',
+        companyPhone: company?.companyPhone || 'Your Phone',
+        companyEmail: company?.companyEmail || 'your@email.com',
+        companyTaxId: company?.taxId || 'Your Tax ID',
+        customerId: '',
+        customerName: '',
+        customerAddress: '',
+        customerPhone: '',
+        customerEmail: '',
+        items: [],
+        subtotal: 0,
+        taxAmount: 0,
+        amount: 0,
+        paymentTerms: 'Net 30',
+        paymentMethods: ['Bank Transfer'],
+        bankDetails: '',
+        paymentInstructions: '',
+        status: 'pending'
+      });
+      setIsDialogOpen(true);
+    } else {
+      console.error('Company data is not available yet.');
+    }
   };
-
+  
+  
   const handleSaveInvoice = async (updatedInvoice: Invoice) => {
     console.log(updatedInvoice);
     try {
@@ -158,74 +156,9 @@ export function InvoicesContent({ searchQuery, setSearchQuery }: InvoicesContent
         </div>
       </div>
 
-      <div className="grid gap-4">
-      {filteredInvoices.length > 0 ? (
-        filteredInvoices.map((invoice) => (
-          <Card key={invoice._id}
-            className="hover:shadow-md transition-shadow cursor-pointer"
-            onClick={() => handleCustomerClick(invoice)}
-          >
-            <CardContent className="p-6">
-              <div className="flex justify-between items-center">
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2">
-                    <h3 className="font-semibold">{invoice.invoiceNumber}</h3>
-                  </div>
-                  <p className="text-sm text-gray-500">{invoice.customerName}</p>
-                  <div className="flex gap-4 text-sm text-gray-500">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="h-4 w-4" />
-                      Issued: {invoice.dateIssued}
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Calendar className="h-4 w-4" />
-                      Due: {invoice.dueDate}
-                    </div>
-                  </div>
-                </div>
-                <div className="text-right space-y-2">
-                  <div className="flex items-center gap-1 text-lg mb-4 font-semibold justify-end">
-                    <DollarSign className="h-4 w-4" />
-                    {invoice.amount.toLocaleString()}
-                    <span className={`px-3 py-1 rounded-full text-sm ${getStatusColor(invoice.status)}`}>
-                      {invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1)}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => {
-                        // Handle PDF download
-                        console.log('Download PDF:', invoice?.invoiceNumber);
-                      }}
-                    >
-                      <Download className="h-4 w-4 mr-1" />
-                      Download PDF
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => {
-                        window.location.href = `mailto:?subject=Invoice ${invoice?.invoiceNumber}&body=Please find the invoice attached.`;
-                      }}
-                    >
-                      <Share2 className="h-4 w-4 mr-1" />
-                      Share via Email
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))
-      ):
-        (
-          <p>No customers found</p>
-        )
-      }
-      </div>
-
+      <InvoiceBox
+      filteredInvoices={filteredInvoices}
+      />
       <InvoiceDialog
         invoice={selectedInvoice}
         isOpen={isDialogOpen}
