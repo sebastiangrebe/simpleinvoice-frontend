@@ -16,6 +16,7 @@ import Image from "next/image";
 import { LogoEditDialog } from "./LogoEditDialog";
 import useCompany from "@/hooks/useCompany";
 import apiClient from "@/services/apiClient";
+import { ProductManagement } from "./ProductManagement";
 
 interface CompanyFormData {
   companyName: string;
@@ -278,7 +279,6 @@ return (
         </form>
       </CardContent>
     </Card>
-
     <LogoEditDialog
       isOpen={isLogoDialogOpen}
       onClose={() => setIsLogoDialogOpen(false)}

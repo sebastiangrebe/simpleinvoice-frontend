@@ -14,6 +14,7 @@ import useCustomers from "@/hooks/useCustomers";
 import InvoiceBox from "./InvoiceBox";
 import useCompany from "@/hooks/useCompany";
 
+
 interface InvoicesContentProps {
   searchQuery: string;
   setSearchQuery: (query: string) => void;

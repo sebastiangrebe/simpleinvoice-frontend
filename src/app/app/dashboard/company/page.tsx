@@ -7,12 +7,13 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+} from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Building2, MapPin, Receipt, X } from "lucide-react";
 import { CompanyContent } from "./components/CompanyContent";
+import { ManagementDashboard } from "./components/ManagementDashboard";
 
 // Mock company data
 const mockCompanyData = {
@@ -67,5 +68,5 @@ export default function CompanyPage() {
   //   );
   // }
 
-  return <CompanyContent />;
+  return <ManagementDashboard />;
 }
