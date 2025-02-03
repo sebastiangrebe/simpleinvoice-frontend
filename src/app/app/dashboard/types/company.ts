@@ -17,3 +17,12 @@ export interface Company {
   export type OnboardingFormData = Omit<Company, 'logo'> & {
     logo: string;
   };
+
+  export interface Product {
+    id: string;
+    name: string;
+    description: string;
+    hourlyRate: number;
+    minimumTime: '15min' | '30min' | '1hour';
+  }
+  
