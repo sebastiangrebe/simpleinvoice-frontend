@@ -8,7 +8,6 @@ import { InvoiceDialog } from "./InvoiceDialog";
 import { Invoice } from "../../types/invoice";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import apiClient from "@/services/apiClient";
-import { useRouter } from "next/navigation";
 import useInvoices from "@/hooks/useInvoices";
 import useCustomers from "@/hooks/useCustomers";
 import InvoiceBox from "./InvoiceBox";
@@ -49,7 +48,6 @@ export function InvoicesContent({ searchQuery, setSearchQuery }: InvoicesContent
         items: [],
         subtotal: 0,
         taxAmount: 0,
-        amount: 0,
         paymentTerms: 'Net 30',
         paymentMethods: ['Bank Transfer'],
         bankDetails: '',

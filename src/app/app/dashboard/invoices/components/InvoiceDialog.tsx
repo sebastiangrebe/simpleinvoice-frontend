@@ -213,14 +213,14 @@ export function InvoiceDialog({ invoice, isOpen, onClose, onSave, onDelete }: In
                   onChange={(e) => handleInputChange('dueDate', e.target.value)}
                 />
               </div>
-              <div className="space-y-2">
+              {/* <div className="space-y-2">
                 <Label>Amount</Label>
                 <Input
                   type="number"
                   value={editedInvoice?.amount}
                   onChange={(e) => handleInputChange('amount', parseFloat(e.target.value))}
                 />
-              </div>
+              </div> */}
               <div className="space-y-2">
                 <Label>Status</Label>
                 <Select

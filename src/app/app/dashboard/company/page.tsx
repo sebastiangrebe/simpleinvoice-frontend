@@ -1,33 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Building2, MapPin, Receipt, X } from "lucide-react";
-import { CompanyContent } from "./components/CompanyContent";
 import { ManagementDashboard } from "./components/ManagementDashboard";
 
-// Mock company data
-const mockCompanyData = {
-  name: "Acme Corporation",
-  logo: "https://via.placeholder.com/150",
-  businessType: "Corporation",
-  streetAddress: "123 Business Ave",
-  city: "Metropolis",
-  state: "NY",
-  zipCode: "10001",
-  country: "United States",
-  taxId: "12-3456789",
-  vatNumber: "VAT123456",
-};
 
 export default function CompanyPage() {
   // const [isSubscribed] = useState(false);
@@ -69,4 +43,5 @@ export default function CompanyPage() {
   // }
 
   return <ManagementDashboard />;
+  
 }

@@ -93,13 +93,14 @@ export default function InvoiceBox({ filteredInvoices }: InvoiceBoxProps) {
                     <div className="flex gap-4 text-sm text-gray-500">
                       <div className="flex items-center gap-1">
                         <Calendar className="h-4 w-4" />
-                        Issued: {invoice.dateIssued}
+                        Issued: {new Date(invoice.dateIssued).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
                       </div>
                       <div className="flex items-center gap-1">
                         <Calendar className="h-4 w-4" />
-                        Due: {invoice.dueDate}
+                        Due: {new Date(invoice.dueDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
                       </div>
                     </div>
+
                   </div>
                   <div className="text-right space-y-2">
                     <div className="flex items-center gap-1 text-lg mb-4 font-semibold justify-end">

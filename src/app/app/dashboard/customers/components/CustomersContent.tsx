@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/Card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/Button";
@@ -10,6 +10,8 @@ import { Customer } from "../../types/customer";
 import apiClient from "@/services/apiClient";
 import useCustomers from "@/hooks/useCustomers";
 import { useRouter } from "next/navigation";
+
+
 
 interface CustomersContentProps {
   searchQuery: string;
@@ -22,11 +24,16 @@ export function CustomersContent({ searchQuery, setSearchQuery }: CustomersConte
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const router = useRouter();
 
+
+
   const filteredCustomers = customers.filter((customer) =>
     customer.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     customer.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
     customer.phone.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+
+
 
   const handleCustomerClick = (customer: Customer) => {
     router.push(`/app/dashboard/customers/${customer._id}`);
@@ -44,6 +51,8 @@ export function CustomersContent({ searchQuery, setSearchQuery }: CustomersConte
     }
   };
 
+
+  
   return (
     <div className="container mx-auto py-6">
       <div className="flex justify-between items-center mb-6">

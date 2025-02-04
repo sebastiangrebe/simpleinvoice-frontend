@@ -10,6 +10,13 @@ export interface InvoiceItem {
 }
 
 
+export interface InvoiceStats {
+  totalInvoices: number;
+  paidInvoices: number;
+  totalPaidAmount:number;
+  paidPercentage: number;
+}
+
 
 
 export interface Invoice {
@@ -41,7 +48,7 @@ export interface Invoice {
   taxAmount: number;
   discount?: number;
   shippingCharges?: number;
-  amount: number; // Grand Total
+  amount?: number; // Grand Total
 
   // Payment Information
   paymentTerms: string;
@@ -54,3 +61,14 @@ export interface Invoice {
   terms?: string;
   status: 'pending' | 'paid' | 'overdue';
 } 
+
+
+
+
+export interface InvoiceSettings {
+  font: 'inter' | 'roboto' | 'arial';
+  primaryColor: string;
+  showLogo: boolean;
+  showDescription: boolean;
+  showContactDetails: boolean;
+}

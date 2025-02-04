@@ -8,10 +8,10 @@ import {
   CardTitle,
 } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
-import { Settings, Bell, Mail, Palette } from "lucide-react";
+import { Settings, CreditCard,} from "lucide-react";
+import { PaymentContent } from "./PaymentContent";
+import { ProfileContent } from "./ProfileContent";
 
 export function SettingsContent() {
   return (
@@ -22,93 +22,39 @@ export function SettingsContent() {
       </div>
 
       <div className="space-y-6">
+        {/* Subscription Management */}
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Bell className="h-5 w-5" />
-              Notifications
+              <CreditCard className="h-5 w-5" />
+              Subscription Management
             </CardTitle>
             <CardDescription>
-              Configure how you want to receive notifications
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <Label>Email Notifications</Label>
-                <p className="text-sm text-gray-500">
-                  Receive notifications about your invoices via email
-                </p>
-              </div>
-              <Switch />
-            </div>
-            <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <Label>Browser Notifications</Label>
-                <p className="text-sm text-gray-500">
-                  Receive notifications in your browser
-                </p>
-              </div>
-              <Switch />
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Mail className="h-5 w-5" />
-              Email Settings
-            </CardTitle>
-            <CardDescription>
-              Customize your email preferences
+              View and update your subscription plan
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="emailSignature">Email Signature</Label>
-              <Input
-                id="emailSignature"
-                placeholder="Enter your email signature"
-              />
+              <Label>Current Plan</Label>
+              <p className="text-sm text-gray-500">Pro Plan ($29/month)</p>
             </div>
-            <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <Label>CC me on sent emails</Label>
-                <p className="text-sm text-gray-500">
-                  Receive a copy of all sent emails
-                </p>
-              </div>
-              <Switch />
+            <div className="space-y-2">
+              <Label>Upgrade Plan</Label>
+              <select className="w-full p-2 border rounded-md">
+                <option value="basic">Basic Plan ($9/month)</option>
+                <option value="pro">Pro Plan ($29/month)</option>
+                <option value="enterprise">Enterprise Plan ($99/month)</option>
+              </select>
+            </div>
+            <div className="flex justify-end">
+              <Button>Upgrade Plan</Button>
             </div>
           </CardContent>
         </Card>
-        {/* <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Palette className="h-5 w-5" />
-              Appearance
-            </CardTitle>
-            <CardDescription>
-              Customize the look and feel of your dashboard
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <Label>Dark Mode</Label>
-                <p className="text-sm text-gray-500">
-                  Switch between light and dark theme
-                </p>
-              </div>
-              <Switch />
-            </div>
-          </CardContent>
-        </Card> */}
-
-        <div className="flex justify-center">
-          <Button>Save Changes</Button>
-        </div>
       </div>
+
+      <ProfileContent/>
+      <PaymentContent/>
     </div>
   );
-} 
+}

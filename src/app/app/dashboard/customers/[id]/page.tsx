@@ -9,6 +9,7 @@ import apiClient from '@/services/apiClient';
 import { Customer } from '../../types/customer';
 import useInvoices from '@/hooks/useInvoices';
 import InvoiceBox from '../../invoices/components/InvoiceBox';
+import { InvoiceStats } from '../../types/invoice';
 
 
 export default function CustomerDetails() {
@@ -19,6 +20,25 @@ export default function CustomerDetails() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [stats, setStats] = useState<InvoiceStats | null>(null);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        if (customer?._id) {
+          const response = await apiClient.get(`/invoices/stats/${customer._id}`);
+          setStats(response.data);
+        }
+      } catch (error) {
+        console.error("Error fetching invoice stats:", error);
+      }
+    };
+
+    if (customer?._id) {
+      fetchStats();
+    }
+  }, [customer?._id]);
+
 
   useEffect(() => {
     const fetchCustomerDetails = async () => {
@@ -86,7 +106,6 @@ export default function CustomerDetails() {
       </div>
 
       <div className="">
-        {/* Customer Details Card */}
         <div className="pb-10 lg:col-span-1">
           <div className="bg-white rounded-lg shadow-md p-6">
             <div className="flex justify-between items-start mb-6">
@@ -120,21 +139,28 @@ export default function CustomerDetails() {
             </div>
 
             <div className="mt-6 pt-6 border-t">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="p-4 bg-white  flex flex-col items-center">
                   <div className="text-sm text-gray-500">Total Invoices</div>
-                  <div className="text-xl font-semibold">{customer.totalInvoices}</div>
+                  <div className="text-xl font-semibold text-gray-800">{stats?.totalInvoices ?? 0}</div>
                 </div>
-                <div>
+                <div className="p-4 bg-white flex flex-col items-center">
+                  <div className="text-sm text-gray-500">Paid Invoices</div>
+                  <div className="text-xl font-semibold text-green-600">{stats?.paidInvoices ?? 0}</div>
+                </div>
+                <div className="p-4 bg-white  flex flex-col items-center">
                   <div className="text-sm text-gray-500">Total Paid</div>
-                  <div className="text-xl font-semibold">${customer.totalPaid.toLocaleString()}</div>
+                  <div className="text-xl font-semibold text-blue-600">${stats?.totalPaidAmount ?? 0}</div>
+
+                  <div className="mt-4 text-sm text-gray-600">
+                    <span className="font-medium">Paid Percentage:</span> {stats?.paidPercentage.toFixed(2) ?? 0}%
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Invoices List */}
         <div className="lg:col-span-2">
           <div className="rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold mb-6">Invoices</h2>

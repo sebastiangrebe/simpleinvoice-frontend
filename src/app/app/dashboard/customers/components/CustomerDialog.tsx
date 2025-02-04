@@ -170,22 +170,6 @@ export function CustomerDialog({ customer, isOpen, onClose, onSave, onDelete }: 
                   onChange={(e) => handleInputChange('registrationNumber', e.target.value)}
                 />
               </div>
-              <div className="space-y-2">
-                <Label>Total Invoices</Label>
-                <Input
-                  value={editedCustomer?.totalInvoices}
-                  type="number"
-                  onChange={(e) => handleInputChange('totalInvoices', parseInt(e.target.value))}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label>Total Paid</Label>
-                <Input
-                  value={editedCustomer?.totalPaid}
-                  type="number"
-                  onChange={(e) => handleInputChange('totalPaid', parseInt(e.target.value))}
-                />
-              </div>
             </div>
           </TabsContent>
         </Tabs>
