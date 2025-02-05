@@ -1,12 +1,16 @@
+'use client'
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/Card";
+import apiClient from "@/services/apiClient";
 import { Check } from "lucide-react";
-import Link from "next/link";
+import { useState } from "react";
+import { toast } from "sonner";
 
 const tiers = [
   {
     name: "Basic Plan",
     price: "$10",
+    planId: "basic_plan_1",
     description: "Perfect for small teams with up to 5 users",
     features: [
       "Up to 5 users",
@@ -17,6 +21,7 @@ const tiers = [
   {
     name: "Growth Plan",
     price: "$10 + $2/user",
+    planId: "growth_plan_1",
     description: "Ideal for growing teams",
     features: [
       "Up to 5 users for $10/month, $2/user above 5",
@@ -38,6 +43,37 @@ const tiers = [
 ];
 
 export function PricingSection() {
+
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+
+  const handlePlanSelect = async (planId: string) => {
+    setLoadingPlan(planId);
+  
+    try {
+      const response = await apiClient.post("/paddle/generate-payment-link", {
+        planId,
+        userId: "test@example.com", 
+        quantity: 1,
+      });
+  
+      if (!response.data || !response.data.paymentLink) throw new Error("Failed to generate payment link");
+  
+      const paymentLink = response.data.paymentLink;
+  
+      if (paymentLink) {
+        window.location.href = paymentLink;
+      } else {
+        toast.error("Payment link generation failed.");
+      }
+    } catch (error) {
+      console.error("Payment request error:", error);
+      toast.error("Error generating payment link. Please try again.");
+    } finally {
+      setLoadingPlan(null);
+    }
+  };
+
+
   return (
     <section className="px-[9%] container py-24 sm:py-32" id="pricing">
       <div className="text-center">
@@ -76,11 +112,12 @@ export function PricingSection() {
               </ul>
             </CardContent>
             <CardFooter>
-              <Link href="/#waitlist">
-                <Button className="w-full" variant={tier.featured ? "default" : "outline"}>
+                <Button className="w-24" variant={tier.featured ? "default" : "outline"}
+                onClick={() => handlePlanSelect(tier.planId)}
+                disabled={loadingPlan === tier.planId}
+                >
                   Get Started
                 </Button>
-              </Link>
             </CardFooter>
           </Card>
         ))}
