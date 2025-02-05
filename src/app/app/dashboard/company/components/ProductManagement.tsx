@@ -1,17 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Plus, Edit2, Trash2 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Product } from '../../types/company';
+import axios from 'axios';
+import apiClient from '@/services/apiClient';
 
-const defaultProducts: Product[] = [
-  {
-    id: '1',
-    name: 'Consulting Services',
-    description: 'Professional business consulting and advisory services',
-    hourlyRate: 150,
-    minimumTime: '1hour'
-  }
-];
+const defaultProducts: Product[] = [];
 
 const ProductForm = ({
   formData,
@@ -101,18 +95,36 @@ export function ProductManagement() {
     minimumTime: '1hour'
   });
 
-  const handleSubmitProduct = () => {
-    if (editingProduct) {
-      const updatedProducts = products.map((p) =>
-        p.id === editingProduct.id ? { ...editingProduct, ...formData } : p
-      );
-      setProducts(updatedProducts);
-      setEditingProduct(null);
-    } else {
-      const newProduct: Product = { id: Date.now().toString(), ...formData };
-      setProducts([...products, newProduct]);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await apiClient.get('products/');
+        setProducts(response.data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  const handleSubmitProduct = async () => {
+    try {
+      if (editingProduct) {
+        const response = await apiClient.put(`products/${editingProduct._id}`, formData);
+        setProducts((prevProducts) =>
+          prevProducts.map((product) =>
+            product._id === editingProduct._id ? response.data : product
+          )
+        );
+      } else {
+        const response = await apiClient.post('products/', formData);
+        setProducts((prevProducts) => [...prevProducts, response.data]);
+      }
+      resetForm();
+    } catch (error) {
+      console.error('Error submitting product:', error);
     }
-    resetForm();
   };
 
   const resetForm = () => {
@@ -120,6 +132,7 @@ export function ProductManagement() {
     setEditingProduct(null);
     setFormData({ name: '', description: '', hourlyRate: 0, minimumTime: '1hour' });
   };
+
 
   const handleEditProduct = (product: Product) => {
     setEditingProduct(product);
@@ -131,9 +144,16 @@ export function ProductManagement() {
     });
   };
 
-  const handleDeleteProduct = (id: string) => {
-    setProducts(products.filter((p) => p.id !== id));
+  const handleDeleteProduct = async (_id: string) => {
+    try {
+        await apiClient.delete(`products/${_id}`);
+        setProducts((prevProducts) => prevProducts.filter((product) => product._id !== _id));
+      }
+     catch (error) {
+      console.error('Error deleting product:', error);
+    }
   };
+  
 
   return (
     <div className="bg-white rounded-lg shadow-md p-6 max-w-2xl mx-auto mt-6">
@@ -163,7 +183,7 @@ export function ProductManagement() {
       <div className="space-y-4">
         {products.map((product) => (
           <div
-            key={product.id}
+            key={product._id}
             className="border rounded-lg p-4 hover:bg-gray-50 transition-colors"
           >
             <div className="flex justify-between items-start">
@@ -175,18 +195,20 @@ export function ProductManagement() {
                   <p className="text-sm text-gray-600">Minimum time: {product.minimumTime}</p>
                 </div>
               </div>
-              <div className="flex space-x-2">
+              <div className="flex space-x-3">
                 <button
                   onClick={() => handleEditProduct(product)}
-                  className="p-2 text-gray-600 hover:text-blue-600"
+                  className="flex items-center space-x-2 px-3 py-1 bg-green-600 text-white rounded-md text-sm font-medium hover:bg-green-700"
                 >
                   <Edit2 className="w-4 h-4" />
+                  <span>Edit</span>
                 </button>
                 <button
-                  onClick={() => handleDeleteProduct(product.id)}
-                  className="p-2 text-gray-600 hover:text-red-600"
+                  onClick={() => handleDeleteProduct(product._id as string)}
+                  className="flex items-center space-x-2 px-3 py-1 bg-red-600 text-white rounded-md text-sm font-medium hover:bg-red-700"
                 >
                   <Trash2 className="w-4 h-4" />
+                  <span>Delete</span>
                 </button>
               </div>
             </div>
